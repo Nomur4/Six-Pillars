@@ -1,0 +1,58 @@
+/* Cores com base no tema Dracula */
+body {
+    background-color: #282A36; /* Fundo principal */
+    color: #F8F8F2; /* Cor do texto */
+}
+
+.region-button {
+    background-color: #44475A; /* Cor dos botões */
+    color: #F8F8F2; /* Cor do texto dos botões */
+}
+
+.region-button.clicked {
+    background-color: #6272A4; /* Cor quando clicado */
+}
+
+.route-info {
+    background-color: #44475A; /* Cor de fundo das informações da rota */
+}
+
+.water-spout,.blastoise, .fake-out {
+    color: #0099CC; /* Azul claro para Water Spout e Blastoise */
+}
+
+.hyper-voice, .togekiss {
+    color: #000000; /* Preto para Hyper Voice */
+}
+
+.eruption, .sunny-Day, .incinerate {
+    color: #FF0000; /* Vermelho para Eruption */
+}
+
+.blizzard, .ice-Beam, .vanilluxe, .water-pulse {
+    color: #A0D6E1; /* Azul claro para Blizzard */
+}
+
+.explosion, .assurance, .rain-dance, .weezing {
+    color: #993399; /* Marrom para Explosion e Assurance */
+}
+
+.dragon-claw, .earthquake, .garchomp {
+    color: #008B8B; /* Azul-petróleo para Dragon Claw e Garchomp */
+}
+
+.random-color {
+    font-weight: bold; /* Deixa as cores aleatórias em negrito */
+}
+
+.icon {
+    width: 40px; /* Tamanho maior da imagem */
+    vertical-align: middle; /* Alinhamento vertical */
+    margin-right: 5px; /* Espaçamento à direita da imagem */
+}
+
+.icon-heald {
+    width: 25px; /* Tamanho maior da imagem */
+    vertical-align: middle; /* Alinhamento vertical */
+    margin-right: 2px; /* Espaçamento à direita da imagem */
+}

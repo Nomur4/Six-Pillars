@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rota 1.0</title>
+    <link rel="stylesheet" href="Colors.css"> <!-- Importa o arquivo de cores -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .region-button {
+            border: none;
+            padding: 20px 25px;
+            font-size: 26px;
+            margin: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            display: inline-block;
+        }
+
+        .route-info {
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 80%;
+            text-align: center;
+            display: none;
+        }
+
+        .content {
+            margin-top: 120px;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .button-container {
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .highlight, .hyper-voice, .eruption, .blizzard, .explosion, .assurance, .dragon-claw, .earthquake, .random-color {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="button-container">
+        <button class="region-button" onclick="toggleRoutes('unova', this)">Unova</button>
+        <button class="region-button" onclick="toggleRoutes('johto', this)">Johto</button>
+        <button class="region-button" onclick="toggleRoutes('kanto', this)">Kanto</button>
+        <button class="region-button" onclick="toggleRoutes('hoenn', this)">Hoenn</button>
+        <button class="region-button" onclick="toggleRoutes('sinnoh', this)">Sinnoh</button>
+    </div>
+
+    <div class="content">
+        <div id="route-info">
+            <div class="route-info" id="unova-info"></div>
+            <div class="route-info" id="johto-info"></div>
+            <div class="route-info" id="kanto-info"></div>
+            <div class="route-info" id="hoenn-info"></div>
+            <div class="route-info" id="sinnoh-info"></div>
+        </div>
+    </div>
+
+    <script>
+        function toggleRoutes(region, button) {
+            const routeInfo = document.getElementById(`${region}-info`);
+            const isVisible = routeInfo.style.display === 'block';
+
+            const allRoutes = document.querySelectorAll('.route-info');
+            allRoutes.forEach(route => {
+                route.style.display = 'none';
+            });
+
+            const buttons = document.querySelectorAll('.region-button');
+            buttons.forEach(btn => {
+                btn.classList.remove('clicked');
+            });
+
+            if (!isVisible) {
+                fetch(`${region}.html`)
+                    .then(response => response.text())
+                    .then(data => {
+                        routeInfo.innerHTML = data;
+                        routeInfo.style.display = 'block';
+                        button.classList.add('clicked');
+
+                        // Alterar o fundo da página para a cor dos botões
+                        document.body.style.backgroundColor = button.style.backgroundColor;
+
+                        highlightKeywords();
+                    })
+                    .catch(error => {
+                        routeInfo.innerHTML = '<p>Erro ao carregar as rotas. Por favor, tente novamente mais tarde.</p>';
+                        console.error('Erro:', error);
+                    });
+            }
+        }
+
+        function highlightKeywords() {
+            const keywords = {
+                'Water Spout': 'water-spout',
+                'Fake Out': 'fake-out',
+                'Water Pulse': 'water-pulse',
+                'Rain Dance': 'rain-dance',
+                'Ice Beam': 'ice-Beam',
+                'Blastoise': 'blastoise',
+                'Weezing': 'weezing',
+                'Incinerate': 'incinerate',
+                'Sunny Day': 'sunny-Day',
+                'Togekiss': 'togekiss',
+                'Hyper Voice': 'hyper-voice',
+                'Eruption': 'eruption',
+                'Vanilluxe': 'vanilluxe',
+                'Blizzard': 'blizzard',
+                'Explosion': 'explosion',
+                'Assurance': 'assurance',
+                'Dragon Claw': 'dragon-claw',
+                'Earthquake': 'earthquake',
+                'Garchomp': 'garchomp'
+            };
+            let content = document.getElementById('route-info').innerHTML;
+
+            for (const [key, className] of Object.entries(keywords)) {
+                const regex = new RegExp(key, 'g');
+                content = content.replace(regex, `<span class="${className}">${key}</span>`);
+            }
+
+            document.getElementById('route-info').innerHTML = content;
+        }
+    </script>
+</body>
+</html>
